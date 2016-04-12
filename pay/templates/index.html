@@ -231,12 +231,9 @@ function getList() {
       $.ajax({
                   type:"POST",
                   url:"/fbcallback/",
-                  data: {
-
-                         'data': response
-                         },
+                  data: JSON.stringify(response)
                   success: function(){
-                      console.log("submitted")
+                      console.log(JSON.stringify(response))
                   }
              });
 
