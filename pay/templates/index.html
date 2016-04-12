@@ -459,7 +459,9 @@ ga('send', 'pageview')
 
 <div id="image-results" style="display:none;">
 	<img id="image-result"/>
- <button onclick="window.location.href='untitled.html'">Book</button>	
+ <form id="createBooking" action="{% url 'pay.views.createBooking' %}" method="post" class="niceform" novalidate>
+ <input type="submit" value="Create Booking" class="button" />
+ </form>	
 </div>
 
 
