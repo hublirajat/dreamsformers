@@ -1,1 +1,306 @@
-hello
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/main.css">
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/datepicker.css">
+        
+        <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>-->
+        <script src="https://code.jquery.com/jquery-1.10.2.js">
+</script>
+  		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">
+</script>
+        <script src="js/vendor/modernizr-2.8.3.min.js">
+</script>
+        <script src="js/vendor/handlebars-v4.0.5.js">
+</script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
+</script>
+		
+        </script>
+        <script>
+
+
+
+$(function() {
+    $("#datepickerstart").datepicker();
+    $("#datepickerend").datepicker();
+});
+</script>
+		
+		
+        <script type="text/javascript">
+
+
+
+
+function getList() {
+    
+    var data = [
+    {
+        flightname: "Delta Airines",
+        departure: "10:40pm",
+        arrival: "2:30am",
+        trip: 'BOS->CHI  CHI->SFO'
+    }, 
+    {
+        flightname: "United Airlines",
+        departure: "11:40pm",
+        arrival: "1:30am",
+        trip: 'BOS->SLC  SLC->SFO'
+    }
+    
+    ];
+    
+    
+    var theTemplateScript = $('#airline-list-template').html();
+    var theTemplate = Handlebars.compile(theTemplateScript);
+    $('#airline-dataTable-container').empty();
+    $('#airline-dataTable-container').append(theTemplate(data));
+}
+
+  $(function() {
+    var projects = [
+{label:'Aalborg',desc:'Denmark',value:'AAL'},
+{label:'Aalesund',desc:'Norway',value:'AES'},
+{label:'Aarhus',desc:'Denmark - Bus service',value:'ZID'},
+{label:'Aarhus',desc:'Denmark - Tirstrup',value:'AAR'},
+{label:'Aasiaat',desc:'Greenland',value:'JEG'},
+{label:'Bolzano',desc:'Italy',value:'BZO'},
+{label:'Boma',desc:'Congo',value:'BOA'},
+{label:'Bombay',desc:'India',value:'BOM'},
+{label:'Bonaire',desc:'Netherlands Antilles',value:'BON'},
+{label:'Bonaventure',desc:'QC',value:'YVB'},
+{label:'Bonn',desc:'Germany',value:'BNJ'},
+{label:'Bora Bora',desc:'French Polynesia',value:'BOB'},
+{label:'Bordeaux',desc:'France',value:'BOD'},
+{label:'Borg El Arab',desc:'Egypt',value:'HBE'},
+{label:'Borkum',desc:'Germany',value:'BMK'},
+{label:'Borlange',desc:'Sweden',value:'BLE'},
+{label:'Bornholm',desc:'Denmark',value:'RNN'},
+{label:'Borroloola',desc:'Australia',value:'BOX'},
+{label:'Bossaro',desc:'Somalia',value:'BSA'},
+{label:'Boston',desc:'MA',value:'BOS'},
+{label:'Boulder',desc:'CO - Bus service',value:'XHH'},
+{label:'Boulder',desc:'CO - Hiltons Har H',value:'WHH'},
+{label:'Boulder',desc:'CO - Municipal Airport',value:'WBU'},
+{label:'Boulia',desc:'Australia',value:'BQL'},
+{label:'Boundary',desc:'AK',value:'BYA'},
+{label:'Bourgas',desc:'Bulgaria',value:'BOJ'},
+{label:'Bourke',desc:'Australia',value:'BRK'},
+{label:'Bournemouth',desc:'United Kingdom',value:'BOH'}
+  ];
+ 
+    $( "#fromcity" ).autocomplete({
+      minLength: 1,
+      source: projects,
+
+      select: function( event, ui ) {
+        $( "#fromcity" ).val( ui.item.value );
+        $( "#fromcity-id" ).val( ui.item.label );
+        $( "#fromcity-description" ).val( ui.item.desc );
+ 
+        return false;
+      }
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( "<a>" + item.label + "<br>" + item.value + "&nbsp &nbsp" + item.desc + "</a>" )
+        .appendTo( ul );
+    };
+		
+		    $( "#tocity" ).autocomplete({
+      minLength: 1,
+      source: projects,
+
+      select: function( event, ui ) {
+        $( "#tocity" ).val( ui.item.value );
+        $( "#tocity-id" ).val( ui.item.label );
+        $( "#tocity-description" ).val( ui.item.desc );
+ 
+        return false;
+      }
+    })
+    .autocomplete( "instance" )._renderItem = function( ul, item ) {
+      return $( "<li>" )
+        .append( "<a>" + item.label + "<br>" + item.value + "&nbsp &nbsp" + item.desc + "</a>" )
+        .appendTo( ul );
+    };
+		
+  });
+
+</script>
+            
+        
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+            <div class="container">
+            <div class="row search-container">
+				<div class="wizrd-container col-xs-1" style="margin-top: -7px;">
+					<!--Wizard Steps Section -->
+					<div class="wizard-vertical">
+
+						<div class="wizard-steps show">
+							<div class="wstep " data-step-num="1">
+								<div class="donut">
+									<div>
+										<span class="step active" >1</span>
+									</div>
+					</div>
+
+
+					</div>
+					<div class="wstep "  data-step-num="0">
+					<div class="donut ">
+					<div>
+					<span class="step active" >2</span>
+					</div>
+					</div>
+
+
+					</div>
+					<div class="wstep last-child" data-step-num="0">
+					<div class="donut">
+					<div>
+					<span class="step active">3</span>
+					</div>
+					</div>
+
+
+					</div>
+			</div>
+
+		</div>
+        	</div>
+        	<div class="col-xs-8">
+                <div class="input-container">
+										
+										<div class="input-box" style="margin-left: 10px;">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon">From</span>
+                            <input id="fromcity" type="text" class="form-control">
+														<input type="hidden" id="fromcity-id">
+														<p id="fromcity-description"></p>
+                        </div>
+                    </div>
+										
+										<div class="input-box" style="margin-left: 10px;">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon">To</span>
+                            <input id="tocity" type="text" class="form-control">
+														<input type="hidden" id="tocity-id">
+														<p id="tocity-description"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-box" style="margin-left:10px">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            <input id="datepickerstart" type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                    <div class="input-box" style="5px">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon glyphicon glyphicon-calendar"></span>
+                            <input id="datepickerend" type="text" class="form-control" aria-describedby="basic-addon1">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-container">
+                    <div class="input-box" style="margin-left:10px">
+                        <div class="input-group search-box">
+                            <span class="input-group-addon glyphicon glyphicon-user"></span>
+                            <input type="text" class="form-control" onfocusout="getList()">
+                        </div>
+                 	</div>
+                 </div>	
+            </div>
+            <div class="text-container .col-xs-4">
+            </div>
+            </div>
+            </div>
+        
+        <div class="row analysis-wizard" ng-controller="ScriptsBarController">
+
+		
+        
+        
+        <div id="airline-dataTable-container">
+            <script id="airline-list-template" type="x-handlebars-template">
+
+
+
+            
+                <div class="table-responsive">
+                        
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Flight</th>
+                                        <th>Departure</th>
+                                        <th>Arrival</th>
+                                        <th>Trip</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each this}}​
+                                    <tr>
+                                        <td>{{flightname}}</td>
+                                        <td>{{departure}}</td>
+                                        <td>{{arrival}}</td>
+                                        <td>{{trip}}</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                            
+                        </div>
+            </script>
+        </div>
+        
+
+
+        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js">
+</script>
+        <script>
+
+
+window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')
+</script>
+        <script src="js/plugins.js">
+</script>
+        <script src="js/main.js">
+</script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+
+
+
+window.ga = function() {
+    ga.q.push(arguments)
+}
+;
+ga.q = [];
+ga.l = +new Date;
+ga('create', 'UA-XXXXX-Y', 'auto');
+ga('send', 'pageview')
+</script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer>
+</script>
+    </body>
+</html>
