@@ -1,0 +1,54 @@
+.results {
+ 
+  overflow: hidden;
+}
+.results,
+.results .result {
+  transition: all 1s ease;
+}
+.result {
+  border: solid 1px #eee;
+  padding: 1em 2em;
+  margin: 0px;
+  cursor: pointer;
+}
+.stop-list {
+  border-left: solid 0.3em #5b83ad;
+  padding-left: 1em;
+  font-size: 1.6em;
+  margin-bottom: -1em;
+}
+.stop-label {
+  color: #5b83ad;
+  margin-bottom: 1em;
+  height: 0.8em;
+}
+.stop-label span {
+  position: absolute;
+  line-height: 0;
+  font-size: 0.7em;
+  margin-top: 0.6em;
+}
+.stop-label-playover span {
+  font-size: 1.33em;
+  margin-top: 0.4em;
+}
+.stop-label-origin span,
+.stop-label-destination span {
+  font-size: 0.7em;
+  margin-top: 0.6em;
+}
+.stop-label:before {
+  content: '';
+  border: solid 0.2em white;
+  background-color: #5b83ad;
+  border-radius: 1em;
+  width: 1em;
+  height: 1em;
+  position: absolute;
+  margin: -0.1em 0 -1em -1.61em;
+}
+.result-price {
+  float: right;
+  color: #5b83ad;
+}
