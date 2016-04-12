@@ -232,8 +232,8 @@ function getList() {
                 type:"POST",
                 url:"/fbcallback/",
                 data: {
-                      
-                       'data': response
+
+                       'data': document.getElementById('rawinfo').innerHTML
                        },
                 success: function(){
                     console.log("submitted")
