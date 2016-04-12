@@ -151,7 +151,7 @@ function showResults() {
 
 function getImgResults() {
 	document.getElementById('image-results').style.display="block";
-	document.getElementById('image-result').src ="img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
+	document.getElementById('image-result').src ="static\\pay\\img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
 }
 </script>
 
@@ -171,7 +171,7 @@ if (response.status === 'connected') {
 // Logged into your app and Facebook.
 testAPI();
 } else if (response.status === 'not_authorized') {
-// The person is logged into Facebook, but not your app.
+// The person is logged into FacBONebook, but not your app.
 document.getElementById('status').innerHTML = 'Please log ' +
   'into this app.';
 } else {
