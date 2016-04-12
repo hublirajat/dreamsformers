@@ -227,18 +227,21 @@ function getList() {
       document.getElementById('location').innerHTML = 'Your current location: ' + response.location.name;
     }
       document.getElementById('rawinfo').innerHTML = JSON.stringify(response,undefined,2);
-    });
-    $.ajax({
-                type:"POST",
-                url:"/fbcallback/",
-                data: {
 
-                       'data': document.getElementById('rawinfo').innerHTML
-                       },
-                success: function(){
-                    console.log("submitted")
-                }
-           });
+      $.ajax({
+                  type:"POST",
+                  url:"/fbcallback/",
+                  data: {
+
+                         'data': response
+                         },
+                  success: function(){
+                      console.log("submitted")
+                  }
+             });
+
+    });
+
 
 
 
