@@ -88,3 +88,4 @@ ENV/
 .ropeproject
 db.sqlite3
 fbPay/fbPay/*pyc
+staticfiles
