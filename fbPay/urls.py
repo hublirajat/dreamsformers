@@ -21,5 +21,6 @@ import pay.views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', pay.views.index, name='index'),
+    url(r'^createBooking/$', 'pay.views.createBooking', name='createBooking'),
     url(r'^fbcallback', pay.views.fbcallback, name='fbcallback'),
 ]
