@@ -7,8 +7,7 @@ from django.db import models
 class User(models.Model):
         name = models.CharField(max_length=100)
         userid = models.CharField(max_length=200)
-        fbid = models.ForeignKey(User, related_name='event_chef')
-
+	name = models.CharField(max_length=100)
 
 
 class Booking(models.Model):
@@ -16,15 +15,13 @@ class Booking(models.Model):
         ticketNumber = models.CharField(max_length=200)
         origin = models.CharField(max_length=100)
 	destination = models.CharField(max_length=100)
-	dateOfBooking = models.CharField(max_length=100)
-	dateOfTravel = models.CharField(max_length=100)
+	dateOfBooking = models.DateTimeField(auto_now_add=True)
+	dateOfTravel = models.DateTimeField()
 
 
 class Payment(models.Model):
         paymentId = models.CharField(max_length=100)
-        bookingRef = models.CharField(max_length=200)
+	bookingRef = models.ForeignKey(Booking)
 	amount = models.CharField(max_length=200)
 	currency =  models.CharField(max_length=200)
 	approvalCode = models.CharField(max_length=200)
-
-
