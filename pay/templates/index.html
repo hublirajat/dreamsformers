@@ -1,7 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
-      {% load staticfiles %}
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title></title>
@@ -13,19 +12,19 @@
 
         <link rel="stylesheet" href="{% static "pay/css/main.css" %}">
         <link rel="stylesheet" href="{% static "pay/css/results.css" %}">
-
+        
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static "pay/css/datepicker.css" %}">
-
+        
         <!--<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>-->
         <script src="https://code.jquery.com/jquery-1.10.2.js">
 </script>
   		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">
 
-
+   
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
 </script>
-
+		
         </script>
         <script>
 
@@ -36,37 +35,38 @@ $(function() {
     $("#datepickerend").datepicker();
 });
 </script>
-
-
+		
+		
         <script type="text/javascript">
 
 
 
 
 function getList() {
-
+    
     var data = [
     {
         flightname: "Delta Airines",
         departure: "10:40pm",
         arrival: "2:30am",
         trip: 'BOS->CHI  CHI->SFO'
-    },
+    }, 
     {
         flightname: "United Airlines",
         departure: "11:40pm",
         arrival: "1:30am",
         trip: 'BOS->SLC  SLC->SFO'
     }
-
+    
     ];
-
-
+    
+    
     var theTemplateScript = $('#airline-list-template').html();
     var theTemplate = Handlebars.compile(theTemplateScript);
     $('#airline-dataTable-container').empty();
     $('#airline-dataTable-container').append(theTemplate(data));
 }
+
 
   $(function() {
     var projects = [
@@ -101,7 +101,7 @@ function getList() {
 {label:'Paris',desc:'France',value:'CDG'},
 {label:'Nice',desc:'France',value:'NCE'}
   ];
-
+ 
     $( "#fromcity" ).autocomplete({
       minLength: 1,
       source: projects,
@@ -110,7 +110,7 @@ function getList() {
         $( "#fromcity" ).val( ui.item.value );
         $( "#fromcity-id" ).val( ui.item.label );
         $( "#fromcity-description" ).val( ui.item.desc );
-
+ 
         return false;
       }
     })
@@ -119,7 +119,7 @@ function getList() {
         .append( "<a>" + item.label + "<br>" + item.value + "&nbsp &nbsp" + item.desc + "</a>" )
         .appendTo( ul );
     };
-
+		
 		    $( "#tocity" ).autocomplete({
       minLength: 1,
       source: projects,
@@ -128,7 +128,7 @@ function getList() {
         $( "#tocity" ).val( ui.item.value );
         $( "#tocity-id" ).val( ui.item.label );
         $( "#tocity-description" ).val( ui.item.desc );
-
+ 
         return false;
       }
     })
@@ -137,28 +137,44 @@ function getList() {
         .append( "<a>" + item.label + "<br>" + item.value + "&nbsp &nbsp" + item.desc + "</a>" )
         .appendTo( ul );
     };
-
+		
   });
 
 
 
 function showResults() {
-
+	
 	document.getElementById('view-results').style.display="block";
 	document.getElementById('fromCityOutput').innerHTML = document.getElementById('fromcity').value;
 	document.getElementById('toCityOutput').innerHTML = document.getElementById('tocity').value;
+	getLayOverCity();
 }
 
 function getImgResults() {
 	document.getElementById('image-results').style.display="block";
-	document.getElementById('image-result').src ="static\\pay\\img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
+	document.getElementById('image-result').src ="img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
 }
+
+function getLayOverCity(){
+	if(document.getElementById('tocity').value == "NCE")
+	{
+		document.getElementById('layOverCity').innerHTML = "CDG";
+	}
+	else if(document.getElementById('tocity').value == "PAR")
+	{
+		document.getElementById('layOverCity').innerHTML = "AMS";
+	}
+	else{
+		document.getElementById('layOverCity').innerHTML = "NYC";
+	}
+}
+
 </script>
-
-
+            
+        
     </head>
     <body>
-      <script>
+<script>
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
 console.log('statusChangeCallback');
@@ -259,8 +275,7 @@ $.ajax({
 </script>
 <div class="fb-login-button" scope="public_profile,email,user_location,user_hometown,email,user_about_me" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 <div id="status"></div>
-<div id="location"></div>
-        <!--[if lt IE 8]>
+<div id="location"></div>        <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
             <div class="container">
@@ -303,7 +318,7 @@ $.ajax({
         	</div>
         	<div class="col-xs-8">
                 <div class="input-container">
-
+										
 										<div class="input-box" style="margin-left: 10px;">
                         <div class="input-group search-box">
                             <span class="input-group-addon">From</span>
@@ -312,7 +327,7 @@ $.ajax({
 							<p id="fromcity-description"></p>
                         </div>
                     </div>
-
+										
 										<div class="input-box" style="margin-left: 10px;">
                         <div class="input-group search-box">
                             <span class="input-group-addon">To</span>
@@ -343,26 +358,26 @@ $.ajax({
                             <input type="text" class="form-control" onfocusout="showResults()">
                         </div>
                  	</div>
-                 </div>
+                 </div>	
             </div>
             <div class="text-container .col-xs-4">
             </div>
             </div>
             </div>
-
+        
         <div class="row analysis-wizard" ng-controller="ScriptsBarController">
 
-
-
-
+		
+        
+        
         <div id="airline-dataTable-container">
             <script id="airline-list-template" type="x-handlebars-template">
 
 
 
-
+            
                 <div class="table-responsive">
-
+                        
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -373,21 +388,21 @@ $.ajax({
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    {{#each this}}​
                                     <tr>
                                         <td>{{flightname}}</td>
                                         <td>{{departure}}</td>
                                         <td>{{arrival}}</td>
                                         <td>{{trip}}</td>
                                     </tr>
-
+                                    {{/each}}
                                 </tbody>
                             </table>
-
+                            
                         </div>
             </script>
         </div>
-
+        
 
 
         <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js">
@@ -425,12 +440,12 @@ ga('send', 'pageview')
 		<div class="stop-list">
 			<div class="stop-label stop-label-origin">
 				<span id="fromCityOutput">
-
+					
 				</span>
 			</div>
 
 			<div class="stop-label stop-label-playover">
-				<span>CDG</span>
+				<span id="layOverCity"></span>
 			</div>
 			<div class="stop-label stop-label-destination">
 				<span id = "toCityOutput"></span>
@@ -444,7 +459,7 @@ ga('send', 'pageview')
 
 <div id="image-results" style="display:none;">
 	<img id="image-result"/>
- <button onclick="window.location.href='untitled.html'">Book</button>
+ <button onclick="window.location.href='untitled.html'">Book</button>	
 </div>
 
 
