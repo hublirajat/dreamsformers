@@ -226,7 +226,6 @@ function getList() {
     {
       document.getElementById('location').innerHTML = 'Your current location: ' + response.location.name;
     }
-      document.getElementById('rawinfo').innerHTML = JSON.stringify(response,undefined,2);
 
       $.ajax({
                   type:"POST",
@@ -406,10 +405,5 @@ ga('send', 'pageview')
         <script src="https://www.google-analytics.com/analytics.js" async defer>
 </script>
 
-      <form method="POST" action="/fbcallback">
-{% csrf_token %}
-<textarea id="rawinfo" name="content" rows="20" cols="60"></textarea><br>
-<input type="submit" value="Save to db"/>
-</form>
     </body>
 </html>
