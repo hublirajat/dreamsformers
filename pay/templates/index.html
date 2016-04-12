@@ -1,16 +1,18 @@
 <!doctype html>
 <html class="no-js" lang="">
     <head>
+      {% load staticfiles %}
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <title></title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        {% load staticfiles %}
+
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
         <link rel="stylesheet" href="{% static "pay/css/main.css" %}">
+        <link rel="stylesheet" href="{% static "pay/css/results.css" %}">
 
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <link rel="stylesheet" href="{% static "pay/css/datepicker.css" %}">
@@ -19,11 +21,8 @@
         <script src="https://code.jquery.com/jquery-1.10.2.js">
 </script>
   		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">
-</script>
-        <script src="{% static "pay/js/vendor/modernizr-2.8.3.min.js" %}">
-</script>
-        <script src="{% static "pay/js/vendor/handlebars-v4.0.5.js" %}">
-</script>
+
+
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
 </script>
 
@@ -98,7 +97,9 @@ function getList() {
 {label:'Boundary',desc:'AK',value:'BYA'},
 {label:'Bourgas',desc:'Bulgaria',value:'BOJ'},
 {label:'Bourke',desc:'Australia',value:'BRK'},
-{label:'Bournemouth',desc:'United Kingdom',value:'BOH'}
+{label:'Bournemouth',desc:'United Kingdom',value:'BOH'},
+{label:'Paris',desc:'France',value:'CDG'},
+{label:'Nice',desc:'France',value:'NCE'}
   ];
 
     $( "#fromcity" ).autocomplete({
@@ -139,113 +140,126 @@ function getList() {
 
   });
 
+
+
+function showResults() {
+
+	document.getElementById('view-results').style.display="block";
+	document.getElementById('fromCityOutput').innerHTML = document.getElementById('fromcity').value;
+	document.getElementById('toCityOutput').innerHTML = document.getElementById('tocity').value;
+}
+
+function getImgResults() {
+	document.getElementById('image-results').style.display="block";
+	document.getElementById('image-result').src ="static\\pay\\img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
+}
 </script>
 
 
     </head>
     <body>
       <script>
-  // This is called with the results from from FB.getLoginStatus().
-  function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-    // The response object is returned with a status field that lets the
-    // app know the current login status of the person.
-    // Full docs on the response object can be found in the documentation
-    // for FB.getLoginStatus().
-    if (response.status === 'connected') {
-      // Logged into your app and Facebook.
-      testAPI();
-    } else if (response.status === 'not_authorized') {
-      // The person is logged into Facebook, but not your app.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into this app.';
-    } else {
-      // The person is not logged into Facebook, so we're not sure if
-      // they are logged into this app or not.
-      document.getElementById('status').innerHTML = 'Please log ' +
-        'into Facebook.';
-    }
-  }
+// This is called with the results from from FB.getLoginStatus().
+function statusChangeCallback(response) {
+console.log('statusChangeCallback');
+console.log(response);
+// The response object is returned with a status field that lets the
+// app know the current login status of the person.
+// Full docs on the response object can be found in the documentation
+// for FB.getLoginStatus().
+if (response.status === 'connected') {
+// Logged into your app and Facebook.
+testAPI();
+} else if (response.status === 'not_authorized') {
+// The person is logged into FacBONebook, but not your app.
+document.getElementById('status').innerHTML = 'Please log ' +
+  'into this app.';
+} else {
+// The person is not logged into Facebook, so we're not sure if
+// they are logged into this app or not.
+document.getElementById('status').innerHTML = 'Please log ' +
+  'into Facebook.';
+}
+}
 
-  // This function is called when someone finishes with the Login
-  // Button.  See the onlogin handler attached to it in the sample
-  // code below.
-  function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-      statusChangeCallback(response);
-    });
-  }
+// This function is called when someone finishes with the Login
+// Button.  See the onlogin handler attached to it in the sample
+// code below.
+function checkLoginState() {
+FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
+}
 
-  window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '1686737964947864',
-    cookie     : true,  // enable cookies to allow the server to access
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.5' // use graph api version 2.5
-  });
+window.fbAsyncInit = function() {
+FB.init({
+appId      : '1686737964947864',
+cookie     : true,  // enable cookies to allow the server to access
+                  // the session
+xfbml      : true,  // parse social plugins on this page
+version    : 'v2.5' // use graph api version 2.5
+});
 
-  // Now that we've initialized the JavaScript SDK, we call
-  // FB.getLoginStatus().  This function gets the state of the
-  // person visiting this page and can return one of three states to
-  // the callback you provide.  They can be:
-  //
-  // 1. Logged into your app ('connected')
-  // 2. Logged into Facebook, but not your app ('not_authorized')
-  // 3. Not logged into Facebook and can't tell if they are logged into
-  //    your app or not.
-  //
-  // These three cases are handled in the callback function.
+// Now that we've initialized the JavaScript SDK, we call
+// FB.getLoginStatus().  This function gets the state of the
+// person visiting this page and can return one of three states to
+// the callback you provide.  They can be:
+//
+// 1. Logged into your app ('connected')
+// 2. Logged into Facebook, but not your app ('not_authorized')
+// 3. Not logged into Facebook and can't tell if they are logged into
+//    your app or not.
+//
+// These three cases are handled in the callback function.
 
-  FB.getLoginStatus(function(response) {
-    statusChangeCallback(response);
-  });
+FB.getLoginStatus(function(response) {
+statusChangeCallback(response);
+});
 
-  };
+};
 
-  // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
+// Load the SDK asynchronously
+(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_US/sdk.js";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
 
-  // Here we run a very simple test of the Graph API after login is
-  // successful.  See statusChangeCallback() for when this call is made.
-  function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me?fields=location,about,currency,email,hometown,name', function(response) {
-      console.log('Successful login for: ' + response.name);
-      console.log(response)
-      document.getElementById('status').innerHTML =
-        'Thanks for logging in, ' + response.name + '!';
-    if(response.hasOwnProperty('location'))
-    {
-      document.getElementById('location').innerHTML = 'Your current location: ' + response.location.name;
-    }
+// Here we run a very simple test of the Graph API after login is
+// successful.  See statusChangeCallback() for when this call is made.
+function testAPI() {
+console.log('Welcome!  Fetching your information.... ');
+FB.api('/me?fields=location,about,currency,email,hometown,name', function(response) {
+console.log('Successful login for: ' + response.name);
+console.log(response)
+document.getElementById('status').innerHTML =
+  'Thanks for logging in, ' + response.name + '!';
+if(response.hasOwnProperty('location'))
+{
+document.getElementById('location').innerHTML = 'Your current location: ' + response.location.name;
+}
 
-      $.ajax({
-                  type:"POST",
-                  url:"/fbcallback/",
-                  data: JSON.stringify(response),
-                  success: function(){
-                      console.log(JSON.stringify(response))
-                  }
-             });
+$.ajax({
+            type:"POST",
+            url:"/fbcallback/",
+            data: JSON.stringify(response),
+            success: function(){
+                console.log(JSON.stringify(response))
+            }
+       });
 
-    });
-
-
+});
 
 
-  }
+
+
+}
 </script>
-      <div class="fb-login-button" scope="public_profile,email,user_location,user_hometown,email,user_about_me" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
-      <div id="status"></div>
-      <div id="location"></div>
+<div class="fb-login-button" scope="public_profile,email,user_location,user_hometown,email,user_about_me" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
+<div id="status"></div>
+<div id="location"></div>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -293,9 +307,9 @@ function getList() {
 										<div class="input-box" style="margin-left: 10px;">
                         <div class="input-group search-box">
                             <span class="input-group-addon">From</span>
-                            <input id="fromcity" type="text" class="form-control">
-														<input type="hidden" id="fromcity-id">
-														<p id="fromcity-description"></p>
+                            <input id="fromcity" type="text" class="form-control" value="BOS">
+							<input type="hidden" id="fromcity-id">
+							<p id="fromcity-description"></p>
                         </div>
                     </div>
 
@@ -303,8 +317,8 @@ function getList() {
                         <div class="input-group search-box">
                             <span class="input-group-addon">To</span>
                             <input id="tocity" type="text" class="form-control">
-														<input type="hidden" id="tocity-id">
-														<p id="tocity-description"></p>
+						    <input type="hidden" id="tocity-id">
+							<p id="tocity-description"></p>
                         </div>
                     </div>
                 </div>
@@ -326,7 +340,7 @@ function getList() {
                     <div class="input-box" style="margin-left:10px">
                         <div class="input-group search-box">
                             <span class="input-group-addon glyphicon glyphicon-user"></span>
-                            <input type="text" class="form-control" onfocusout="getList()">
+                            <input type="text" class="form-control" onfocusout="showResults()">
                         </div>
                  	</div>
                  </div>
@@ -404,6 +418,40 @@ ga('send', 'pageview')
 </script>
         <script src="https://www.google-analytics.com/analytics.js" async defer>
 </script>
+
+<div id="view-results" class="view-results col-sm-4 col-md-4" style="display: none;">
+  <h3>Results</h3>
+<div id="results-airline" class="result" style="transform: translate3d(0px, 0px, 0px);">
+		<div class="stop-list">
+			<div class="stop-label stop-label-origin">
+				<span id="fromCityOutput">
+
+				</span>
+			</div>
+
+			<div class="stop-label stop-label-playover">
+				<span>CDG</span>
+			</div>
+			<div class="stop-label stop-label-destination">
+				<span id = "toCityOutput"></span>
+        	</div>
+       </div>
+ </div>
+ <button onclick="getImgResults()">Submit</button>
+</div>
+
+
+
+<div id="image-results" style="display:none;">
+	<img id="image-result"/>
+ <button onclick="window.location.href='untitled.html'">Book</button>
+</div>
+
+
+
+
+
+
 
     </body>
 </html>
