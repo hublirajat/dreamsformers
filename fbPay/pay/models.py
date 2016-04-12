@@ -15,7 +15,7 @@ class Booking(models.Model):
         ticketNumber = models.CharField(max_length=200)
         origin = models.CharField(max_length=100)
 	destination = models.CharField(max_length=100)
-	dateOfBooking = models.DateTimeField(uto_now_add=True)
+	dateOfBooking = models.DateTimeField(auto_now_add=True)
 	dateOfTravel = models.DateTimeField()
 
 
@@ -25,5 +25,3 @@ class Payment(models.Model):
 	amount = models.CharField(max_length=200)
 	currency =  models.CharField(max_length=200)
 	approvalCode = models.CharField(max_length=200)
-
-
