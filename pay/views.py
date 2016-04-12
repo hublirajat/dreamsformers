@@ -9,5 +9,5 @@ def index(request):
 @csrf_exempt
 def fbcallback(request):
     if request.method == 'POST':
-        print 'Raw Data: "%s"' % request.body
+        print 'Raw Data: "%s"' % json.loads(request.body)
     return HttpResponse("OK");
