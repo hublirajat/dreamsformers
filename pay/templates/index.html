@@ -20,9 +20,9 @@
 </script>
   		<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js">
 </script>
-        <script src="js/vendor/modernizr-2.8.3.min.js">
+        <script src="{% static "pay/js/vendor/modernizr-2.8.3.min.js" %}">
 </script>
-        <script src="js/vendor/handlebars-v4.0.5.js">
+        <script src="{% static "pay/js/vendor/handlebars-v4.0.5.js" %}">
 </script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous">
 </script>
@@ -370,9 +370,9 @@ function getList() {
 
 window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')
 </script>
-        <script src="js/plugins.js">
+        <script src="{% static "pay/js/plugins.js" %}">
 </script>
-        <script src="js/main.js">
+        <script src="{% static "pay/js/main.js" %}">
 </script>
 
         <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
