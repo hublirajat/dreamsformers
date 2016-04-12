@@ -15,6 +15,7 @@ def fbcallback(request):
         print 'Json Data: "%s"' % json_data
         newuser = UserProfile()
         newuser.fbId = json_data["id"]
+        print 'FBID:',json_data["id"]
         newuser.firstName = json_data["name"].split(' ')[0]
         newuser.lastName = json_data["name"].split(' ')[1]
         newuser.save()
