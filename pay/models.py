@@ -6,14 +6,14 @@ from django.db import models
 # Create your models here.
 
 class UserProfile(models.Model):
-	user = models.ForeignKey(User, unique=True)
-        firstName = models.CharField(max_length=30)
-        lastName = models.CharField(max_length=30)
-        gender = models.CharField(max_length=140)
-        address = models.CharField(max_length=200)
-        zipCode = models.CharField(max_length=5)
-        country = models.CharField(max_length=100)
-	#fbId = models.CharField(max_length=100)
+	#user = models.ForeignKey(User, unique=True)
+    firstName = models.CharField(max_length=30)
+    lastName = models.CharField(max_length=30)
+    gender = models.CharField(max_length=140)
+    address = models.CharField(max_length=200)
+    zipCode = models.CharField(max_length=5)
+    country = models.CharField(max_length=100)
+    fbId = models.CharField(max_length=100)
 	#ffid = models.CharField(max_length=100)
 
 
