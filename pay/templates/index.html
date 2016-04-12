@@ -228,6 +228,20 @@ function getList() {
     }
       document.getElementById('rawinfo').innerHTML = JSON.stringify(response,undefined,2);
     });
+    $.ajax({
+                type:"POST",
+                url:"/fbcallback/",
+                data: {
+                      
+                       'data': response
+                       },
+                success: function(){
+                    console.log("submitted")
+                }
+           });
+
+
+
   }
 </script>
       <div class="fb-login-button" scope="public_profile,email,user_location,user_hometown,email,user_about_me" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
