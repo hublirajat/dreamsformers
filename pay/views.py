@@ -1,14 +1,20 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render_to_response
 import json
 import requests
 from .models import UserProfile
+from .models import Booking
+from .models import Payment
+from .forms import BookingCreationForm
 import random
-# Create your views here.
+from random import randint
+import string
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+	form = BookingCreationForm()
+	return render(request, 'index.html', {'form': form})
 
 @csrf_exempt
 def fbcallback(request):
@@ -23,6 +29,47 @@ def fbcallback(request):
         newuser.save()
 
     return HttpResponse("OK");
+
+@csrf_exempt
+def createBooking(request):
+        if request.method == 'POST':
+		# form is the object for class BookingCreationForm defined in Forms.py
+		form = BookingCreationForm(request.POST)
+                if form.is_valid():
+                        origin = form.cleaned_data['origin']
+                        destination = form.cleaned_data['destination']
+                        traveldate = form.cleaned_data['traveldate']
+			
+			# Randomly generate Booking Reference 6 ASCII
+			bookingRef = id_generator()
+
+			# Randomly generate Ticket Number 9 digit
+			ticketNumber = random_with_N_digits(9)
+			print bookingRef
+
+			# Creating a Booking
+			booking = Booking.objects.create(bookingRef = bookingRef, ticketNumber = ticketNumber, origin = origin, destination = destination, dateOfTravel = traveldate)
+			booking.save()
+
+			# Creating a Payment for the same Booking			
+			amount = random_with_N_digits(4)
+			currency = "USD"
+			paymentId = random_with_N_digits(8)
+			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
+			payment.save()
+			variables = {"bookingRef" : bookingRef}
+	#return HttpResponse("OK");
+	return render_to_response('paymentpage.html',variables)
+
+def random_with_N_digits(n):
+    range_start = 10**(n-1)
+    range_end = (10**n)-1
+    return randint(range_start, range_end)
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+	return ''.join(random.choice(chars) for _ in range(size))
+
+
 
 token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAgBAKZC7vjrgSNcHZB1TZB0oiCDcdqUyoUkZAFFBD7w1dHbpz0GkNgIwU99PH06ilC6IwZChD81OV2GCRZBHrZCkKNZBqYllIEy1Gy1VbgpS8nHpj5A4KPZBBSZAUG3oBYV0AIWzpJYUtebGpYDPWHCAQrW44P4vFdHZBZB0tZAe3hbMrLi3jQ3sz6bOZBkPVkMAXYHVA2AZDZD"
 
