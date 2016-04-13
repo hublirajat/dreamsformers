@@ -128,8 +128,11 @@ def messengerhook(request):
                         handleMessage(event["sender"]["id"],event["message"]["text"])
                     else:
                         if "recipient" in event and "delivery" not in event:
+                            print event
                             if "optin" in event:
+                                print "here"
                                 if "ref" in event["optid"]:
+                                    print pid
                                     pid = event["optid"]["ref"]
                                     for payment in Payment.objects.filter(paymentId=id):
                                         print payment
