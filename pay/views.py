@@ -90,6 +90,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAgBAKZC7vjrgSNcHZB1TZB0oiCDcdqUyoUkZAFFBD7w1dHbpz0GkNgIwU99PH06ilC6IwZChD81OV2GCRZBHrZCkKNZBqYllIEy1Gy1VbgpS8nHpj5A4KPZBBSZAUG3oBYV0AIWzpJYUtebGpYDPWHCAQrW44P4vFdHZBZB0tZAe3hbMrLi3jQ3sz6bOZBkPVkMAXYHVA2AZDZD"
 
 def sendResponse(sender, message_text):
+    print 'test3'
     data = {}
     data["message"] = {}
     data["message"]["text"] = message_text
