@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+import requests
 from .models import UserProfile
 # Create your views here.
 
@@ -22,6 +23,15 @@ def fbcallback(request):
 
     return HttpResponse("OK");
 
+token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAgBAOZB8Mr6be3rUEyNWksZAIuMyMToKvIGKbW0tQnDHBxnUvlJxlbuphalWu59Mf2nzTXKlrA8oUePEVs9RZCyNXreJunD8mtZBNVZBo6sh8zrYhg6xyZCo92bN2T9Q3AetOR3SVN7UHzbbnlqUqQY8RDQJY6GohAq2vRsQJKSZCj6rmqoToRg3cZD"
+
+def sendResponse(sender, text):
+    data = { text: test,
+             recipient: { id: sender }}
+
+    requests.post(token,data)
+    
+
 @csrf_exempt
 def messengerhook(request):
     print request
@@ -38,5 +48,6 @@ def messengerhook(request):
         messaging_events = json_data["entry"][0]["messaging"]
         for event in messaging_events:
             print event["message"]["text"]
+            sendResponse(event["sender"]["id"],event["message"]["text"])
         return HttpResponse("OK")
 
