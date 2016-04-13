@@ -62,9 +62,14 @@ def messengerhook(request):
             json_data = json.loads(request.body)
 
             messaging_events = json_data["entry"][0]["messaging"]
-            for event in messaging_events:
-                print event["message"]["text"]
-                handleMessage(event["sender"]["id"],event["message"]["text"])
-            return HttpResponse("OK")
+            for entry in json_data["entry"]:
+                for event in entry["messaging"]:
+                    if "message" in event:
+                        print event["message"]["text"]
+                        handleMessage(event["sender"]["id"],event["message"]["text"])
+                    else:
+                        if "recipient" in event:
+                            sendResponse(event["recipient"]["1712978292318636"], "Hello, please pay for your ticket")
+                return HttpResponse("OK")
         except:
             return HttpResponse("OK")
