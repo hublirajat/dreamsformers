@@ -65,7 +65,7 @@ def createBooking(request):
 			paymentId = random_with_N_digits(8)
 			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
 			payment.save()
-			variables = {"bookingRef" : bookingRef}
+			variables = {"bookingRef" : bookingRef, "amount": amount, "pri" : paymentId}
 	#return HttpResponse("OK");
 	return render_to_response('paymentpage.html',{'variables' : variables})
 
