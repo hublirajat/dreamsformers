@@ -19,30 +19,56 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         </script>​
 
-            
-        
+
+
     </head>
     <body>
+    <script>
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    window.fbAsyncInit = function() {
+    FB.init({
+    appId      : '1686737964947864',
+    cookie     : true,  // enable cookies to allow the server to access
+                      // the session
+    xfbml      : true,  // parse social plugins on this page
+    version    : 'v2.6' // use graph api version 2.5
+    });
+    }
+
+    </script>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-        
-<div style="display: block">
-	<span style="color:blue;font-size:20px">Your reservation is :</span><span style="color:red;font-size:20px">Awaiting payment</span>
-	<span style="color:blue;font-size:20px">Reservation Reference</span><span style="color:red;font-size:20px">{{ bookingRef.bookingRef }}</span>
-	<span><img src="/static/pay/img/BOS_NCE_BOOK.PNG" /></span>
-	<span><img src="/static/pay/img/BOOK_CreditCard.PNG" /></span>
-	<span><img src="/static/pay/img/BOOK_paypal.PNG" /></span>
-	<div class="fb-div">
-	<span><img src="/static/pay/img/fb_text.PNG" /></span>	
-	<span><img src="/static/pay/img/payWithFB.PNG" onclick="window.open('./fb_pay.html');"/></span>	
-	</div>
-	
-</div>
-        
 
-        
+<div style="display: block">
+ <table>
+	<tr><td><span style="color:blue;font-size:20px">Your reservation is :</span><span style="color:red;font-size:20px">Awaiting payment</span></td></tr>
+	<tr><td><span style="color:blue;font-size:20px">Reservation Reference</span><span style="color:red;font-size:20px">{{ variables.bookingRef }}</span></td></tr>
+	<tr><td><span><img src="/static/pay/img/BOS_NCE_BOOK.PNG" /></span></td></tr>
+	<tr><td><span><img src="/static/pay/img/BOOK_CreditCard.PNG" /></span></td></tr>
+	<tr><td><span><img src="/static/pay/img/BOOK_paypal.PNG" /></span></td></tr>
+	<tr><td><div class="fb-div">
+	<span><img src="/static/pay/img/fb_text.PNG" /></span>
+	<span><div class="fb-send-to-messenger"
+    messenger_app_id="1686737964947864"
+    page_id="1712978292318636"
+    data-ref="test"
+    color="blue"
+    size="standard"></div></span>
+	</div></td></tr>
+</table>
+</div>
+
+
+
 
 
 
