@@ -175,6 +175,7 @@ function getLayOverCity(){
 
     </head>
     <body>
+<form id="createBooking" action="createBooking" method="post" name="myForm" novalidate>
 <script>
 // This is called with the results from from FB.getLoginStatus().
 function statusChangeCallback(response) {
@@ -319,11 +320,11 @@ $.ajax({
         	</div>
         	<div class="col-xs-8">
                 <div class="input-container">
-
+		<form id="createEvent" action="{% url 'pay.views.createBooking' %}" method="post" class="niceform" novalidate>{% csrf_token %}
 										<div class="input-box" style="margin-left: 10px;">
                         <div class="input-group search-box">
                             <span class="input-group-addon">From</span>
-                            <input id="fromcity" type="text" class="form-control" value="BOS">
+ 			    <dd>{{ form.origin }}</dd>
 							<input type="hidden" id="fromcity-id">
 							<p id="fromcity-description"></p>
                         </div>
@@ -332,7 +333,7 @@ $.ajax({
 										<div class="input-box" style="margin-left: 10px;">
                         <div class="input-group search-box">
                             <span class="input-group-addon">To</span>
-                            <input id="tocity" type="text" class="form-control">
+			    <dd>{{ form.destination }}</dd>
 						    <input type="hidden" id="tocity-id">
 							<p id="tocity-description"></p>
                         </div>
@@ -342,7 +343,7 @@ $.ajax({
                     <div class="input-box" style="margin-left:10px">
                         <div class="input-group search-box">
                             <span class="input-group-addon glyphicon glyphicon-calendar"></span>
-                            <input id="datepickerstart" type="text" class="form-control" aria-describedby="basic-addon1">
+			    <dd>{{ form.traveldate }}</dd>
                         </div>
                     </div>
                     <div class="input-box" style="5px">
@@ -360,6 +361,8 @@ $.ajax({
                         </div>
                  	</div>
                  </div>
+		<input type="submit" value="Search" class="button" />
+		</form>
             </div>
             <div class="text-container .col-xs-4">
             </div>
@@ -460,15 +463,10 @@ ga('send', 'pageview')
 
 <div id="image-results" style="display:none;">
 	<img id="image-result"/>
- <form id="createBooking" action="{% url 'pay.views.createBooking' %}" method="post" class="niceform" novalidate>
- <input type="submit" value="Create Booking" class="button" />
+ <button onclick="createBooking()">GO</button>
+
  </form>	
 </div>
-
-
-
-
-
 
 
     </body>
