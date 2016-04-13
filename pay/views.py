@@ -110,7 +110,7 @@ def sendResponseImage(sender, image_url):
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
-    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png"
+    data["message"]["attachment"]["payload"]["url"] = image_url
     print 'Sending:',data
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
@@ -118,10 +118,13 @@ def sendResponseImage(sender, image_url):
 def handleMessage(sender, message_text):
     if "pay" in message_text.lower():
         sendResponse(sender, "Your flight has been paid!")
-        sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
-        sendResponseImage(sender,"test")
+        sendResponse(sender, "Here is your confirmation:")
+        sendResponseImage(sender,"https://dreamsformers.herokuapp.com/static/pay/img/ConfirmationMessenger.png")
+        sendResponse(sender, "Here is your boarding pass:")
+        sendResponseImage(sender,"https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png")
+
     else:
         sendResponse(sender, "I don't understand")
 
