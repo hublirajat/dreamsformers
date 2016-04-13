@@ -33,7 +33,7 @@ def messengerhook(request):
             return HttpResponse("OK");
     elif request.method == 'POST':
         print request.body
-        json_data = json.loads(requests.body)
+        json_data = json.loads(request.body)
 
         messaging_events = json_data["entry"]["messaging"]
         for event in messaging_events:
