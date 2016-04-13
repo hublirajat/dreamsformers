@@ -28,10 +28,11 @@ token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAg
 def sendResponse(sender, message_text):
     data = { message: {
                 text: message_text
-             }
+             },
              recipient: { 
-                 id: sender }
+                 id: sender 
              }
+           }
 
     requests.post(token,data)
     
