@@ -94,11 +94,19 @@ def sendResponse(sender, message_text):
 
     print 'Sending:',data
 
+    response = requests.post(token,json=data)
+    print 'Response :', response, response.content
+
+def sendResponseImage(sender, image_url):
+    data = {}
+    data["recipient"] = {}
+    data["recipient"]["id"] = sender
+
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
     data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/ReceiveConfirmationPhone.png"
-
+    print 'Sending:',data
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
 
@@ -108,6 +116,7 @@ def handleMessage(sender, message_text):
         sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
+        sendResponseImage(sender,"test")
     else:
         sendResponse(sender, "I don't understand")
 
