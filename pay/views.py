@@ -90,6 +90,7 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
 token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAgBAKZC7vjrgSNcHZB1TZB0oiCDcdqUyoUkZAFFBD7w1dHbpz0GkNgIwU99PH06ilC6IwZChD81OV2GCRZBHrZCkKNZBqYllIEy1Gy1VbgpS8nHpj5A4KPZBBSZAUG3oBYV0AIWzpJYUtebGpYDPWHCAQrW44P4vFdHZBZB0tZAe3hbMrLi3jQ3sz6bOZBkPVkMAXYHVA2AZDZD"
 
 def sendResponse(sender, message_text):
+    print 'test3'
     data = {}
     data["message"] = {}
     data["message"]["text"] = message_text
@@ -110,7 +111,7 @@ def sendResponseImage(sender, image_url):
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
-    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png"
+    data["message"]["attachment"]["payload"]["url"] = image_url
     print 'Sending:',data
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
@@ -118,10 +119,13 @@ def sendResponseImage(sender, image_url):
 def handleMessage(sender, message_text):
     if "pay" in message_text.lower():
         sendResponse(sender, "Your flight has been paid!")
-        sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
-        sendResponseImage(sender,"test")
+        sendResponse(sender, "Here is your confirmation:")
+        sendResponseImage(sender, "https://dreamsformers.herokuapp.com/static/pay/img/ConfirmationMessenger.png")
+        sendResponse(sender, "Here is your boarding pass:")
+        sendResponseImage(sender, "https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png")
+
     else:
         sendResponse(sender, "I don't understand")
 
@@ -155,9 +159,12 @@ def messengerhook(request):
                                     pid = event["optin"]["ref"]
                                     print pid
                                     for payment in Payment.objects.filter(paymentId=pid):
+                                        print "here4"
                                         print payment
                                         sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
                                         sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
+                                        print 'here3'
                 return HttpResponse("OK")
         except:
+            print 'something went wrong'
             return HttpResponse("OK")
