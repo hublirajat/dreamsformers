@@ -21,3 +21,9 @@ def fbcallback(request):
         newuser.save()
 
     return HttpResponse("OK");
+
+@csrf_exempt
+def messengerhook(request):
+    print request
+    return HttpResponse("OK");
+

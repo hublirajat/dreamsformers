@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', pay.views.index, name='index'),
     url(r'^fbcallback', pay.views.fbcallback, name='fbcallback'),
+    url(r'^messengerhook',pay.views.messengerhook,name='messengerhook')
 ]
