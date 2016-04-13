@@ -106,7 +106,7 @@ def sendResponseImage(sender, image_url):
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
-    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/ReceiveConfirmationPhone.png"
+    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/img/ReceiveConfirmationPhone.png"
     print 'Sending:',data
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
