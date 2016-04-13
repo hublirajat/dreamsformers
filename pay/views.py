@@ -70,8 +70,12 @@ def createBooking(request):
 			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
 			payment.save()
 			variables = {"bookingRef" : bookingRef, "amount": amount, "pri" : paymentId}
-	#return HttpResponse("OK");
-	return render_to_response('paymentpage.html',{'variables' : variables})
+	if destination == 'NCE':
+		return render_to_response('paymentpage1.html',{'variables' : variables})
+	elif destination == 'CDG':
+		return render_to_response('paymentpage2.html',{'variables' : variables})
+	else:
+		return render_to_response('paymentpage1.html',{'variables' : variables})
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
