@@ -47,12 +47,15 @@ def messengerhook(request):
             print request.GET.get('hub.challenge','')
             return HttpResponse("OK");
     elif request.method == 'POST':
-        print request.body
-        json_data = json.loads(request.body)
+        try:
+            print request.body
+            json_data = json.loads(request.body)
 
-        messaging_events = json_data["entry"][0]["messaging"]
-        for event in messaging_events:
-            print event["message"]["text"]
-            sendResponse(event["sender"]["id"],event["message"]["text"])
-        return HttpResponse("OK")
+            messaging_events = json_data["entry"][0]["messaging"]
+            for event in messaging_events:
+                print event["message"]["text"]
+                sendResponse(event["sender"]["id"],event["message"]["text"])
+            return HttpResponse("OK")
+        except:
+            return HttpResponse("OK")
 
