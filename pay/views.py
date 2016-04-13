@@ -69,6 +69,7 @@ def messengerhook(request):
                         handleMessage(event["sender"]["id"],event["message"]["text"])
                     else:
                         if "recipient" in event:
+                            pass
                             #sendResponse(event["sender"]["id"], "Hello, please pay for your ticket")
                 return HttpResponse("OK")
         except:
