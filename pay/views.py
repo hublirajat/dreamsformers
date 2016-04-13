@@ -25,6 +25,9 @@ def fbcallback(request):
 @csrf_exempt
 def messengerhook(request):
     print request
-    print request.GET.get('hub.challenge','')
-    return HttpResponse("OK");
+    if(request.GET.get('hub.verify_token') == 'test'):
+        return HttpResponse(request.GET.get('hub.challenge',''))
+    else:
+        print request.GET.get('hub.challenge','')
+        return HttpResponse("OK");
 
