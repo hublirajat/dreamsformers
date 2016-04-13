@@ -102,6 +102,7 @@ def sendResponseImage(sender, image_url):
     data["recipient"] = {}
     data["recipient"]["id"] = sender
 
+    data["message"] = {}
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
