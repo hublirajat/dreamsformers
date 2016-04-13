@@ -161,6 +161,7 @@ def messengerhook(request):
                                         print payment
                                         sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
                                         sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
+                                        print 'here3'
                 return HttpResponse("OK")
         except:
             print 'something went wrong'
