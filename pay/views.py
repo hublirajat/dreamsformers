@@ -3,6 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 import requests
 from .models import UserProfile
+import random
 # Create your views here.
 
 # Create your views here.
@@ -41,7 +42,7 @@ def handleMessage(sender, message_text):
     if "pay" in message_text.lower():
         sendResponse(sender, "You're flight has been paid!")
         sendResponse(sender, "Here is your boarding pass:")
-        sendResponse(sender, "PNR: 123456")
+        sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
     else:
         sendResponse(sender, "I don't understand")
 
