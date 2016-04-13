@@ -43,6 +43,7 @@ def handleMessage(sender, message_text):
         sendResponse(sender, "You're flight has been paid!")
         sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
+        sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
     else:
         sendResponse(sender, "I don't understand")
 
