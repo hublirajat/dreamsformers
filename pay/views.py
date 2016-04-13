@@ -59,7 +59,7 @@ def createBooking(request):
 			payment.save()
 			variables = {"bookingRef" : bookingRef}
 	#return HttpResponse("OK");
-	return render_to_response('paymentpage.html',variables)
+	return render_to_response('paymentpage.html', {'variables': variables})
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
