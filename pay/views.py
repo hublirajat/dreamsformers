@@ -113,7 +113,7 @@ def sendResponseImage(sender, image_url):
 
 def handleMessage(sender, message_text):
     if "pay" in message_text.lower():
-        sendResponse(sender, "You're flight has been paid!")
+        sendResponse(sender, "Your flight has been paid!")
         sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
