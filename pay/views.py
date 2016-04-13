@@ -159,6 +159,9 @@ def messengerhook(request):
                                 print pid
                                 for payment in Payment.objects.filter(paymentId=pid):
                                     print payment
+                                    print event["sender"]["id"]
+                                    print "Hello, please pay for your ticket REF#"+pid
+                                    print "Amount: "+payment.amount+" "+payment.currency
                                     sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
                                     sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
                                     print 'here3'
