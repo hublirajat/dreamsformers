@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^$', pay.views.index, name='index'),
     url(r'^createBooking$', 'pay.views.createBooking', name='createBooking'),
     url(r'^fbcallback', pay.views.fbcallback, name='fbcallback'),
-    url(r'^messengerhook',pay.views.messengerhook,name='messengerhook')
+    url(r'^messengerhook',pay.views.messengerhook,name='messengerhook'),
+    url(r'^fb_pay$',pay.views.fb_pay,name='fb_pay'),
+    url(r'^fb_pay_2$',pay.views.fb_pay_2,name='fb_pay_2')
 ]
