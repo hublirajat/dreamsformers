@@ -128,7 +128,13 @@ def messengerhook(request):
                         handleMessage(event["sender"]["id"],event["message"]["text"])
                     else:
                         if "recipient" in event and "delivery" not in event:
-                            sendResponse(event["sender"]["id"], "Hello, please pay for your ticket")
+                            if "optin" in event:
+                                if "ref" in event["optid"]:
+                                    pid = event["optid"]["ref"]
+                                    for payment in Payment.objects.filter(paymentId=id):
+                                        print payment
+                                        sendResponse(event["sender"]["id"], "Hello, please pay for your ticket")
+                                        sendResponse(event["sender"]["id"], "Amount"+payment.amount+" "+payment.currency)
                 return HttpResponse("OK")
         except:
             return HttpResponse("OK")
