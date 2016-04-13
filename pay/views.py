@@ -26,13 +26,11 @@ def fbcallback(request):
 token = "https://graph.facebook.com/v2.6/me/messages?access_token=CAAXZBFEk62ZAgBAOZB8Mr6be3rUEyNWksZAIuMyMToKvIGKbW0tQnDHBxnUvlJxlbuphalWu59Mf2nzTXKlrA8oUePEVs9RZCyNXreJunD8mtZBNVZBo6sh8zrYhg6xyZCo92bN2T9Q3AetOR3SVN7UHzbbnlqUqQY8RDQJY6GohAq2vRsQJKSZCj6rmqoToRg3cZD"
 
 def sendResponse(sender, message_text):
-    data = { message: {
-                text: message_text
-             },
-             recipient: { 
-                 id: sender 
-             }
-           }
+    data = {}
+    data["message"] = {}
+    data["message"]["text"] = message_text
+    data["recipient"] = {}
+    data["recipient"]["id"] = sender
 
     requests.post(token,data)
     
