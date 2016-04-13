@@ -96,7 +96,6 @@ def sendResponse(sender, message_text):
 
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
-    data["message"]["attachment"] = {}
     data["message"]["attachment"]["payload"] = {}
     data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/ReceiveConfirmationPhone.png"
 
