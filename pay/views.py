@@ -139,31 +139,29 @@ def messengerhook(request):
             print request.GET.get('hub.challenge','')
             return HttpResponse("OK");
     elif request.method == 'POST':
-        try:
-            print request.body
-            json_data = json.loads(request.body)
+        print request.body
+        json_data = json.loads(request.body)
 
-            messaging_events = json_data["entry"][0]["messaging"]
-            for entry in json_data["entry"]:
-                for event in entry["messaging"]:
-                    if "message" in event:
-                        print event["message"]["text"]
-                        handleMessage(event["sender"]["id"],event["message"]["text"])
-                    else:
-                        if "recipient" in event and "delivery" not in event:
-                            print event
-                            if "optin" in event:
-                                print "here"
-                                if "ref" in event["optin"]:
-                                    print "here2"
-                                    pid = event["optin"]["ref"]
-                                    print pid
-                                    for payment in Payment.objects.filter(paymentId=pid):
-                                        print payment
-                                        sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
-                                        sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
-                                        print 'here3'
-                return HttpResponse("OK")
-        except:
-            print 'something went wrong'
+        messaging_events = json_data["entry"][0]["messaging"]
+        for entry in json_data["entry"]:
+            for event in entry["messaging"]:
+                if "message" in event:
+                    print event["message"]["text"]
+                    handleMessage(event["sender"]["id"],event["message"]["text"])
+                else:
+                    if "recipient" in event and "delivery" not in event:
+                        print event
+                        if "optin" in event:
+                            print "here"
+                            if "ref" in event["optin"]:
+                                print "here2"
+                                pid = event["optin"]["ref"]
+                                print pid
+                                for payment in Payment.objects.filter(paymentId=pid):
+                                    print payment
+                                    sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
+                                    sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
+                                    print 'here3'
             return HttpResponse("OK")
+            #print 'something went wrong'
+            #return HttpResponse("OK")
