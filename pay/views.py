@@ -24,6 +24,10 @@ def fb_pay_2(request):
     print 'test'
     return render(request, 'fb_pay_2.html')
 
+def fb_pay_3(request):
+    print 'test'
+    return render(request, 'fb_pay_3.html')
+
 @csrf_exempt
 def fbcallback(request):
     if request.method == 'POST':
@@ -65,7 +69,7 @@ def createBooking(request):
 			paymentId = random_with_N_digits(8)
 			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
 			payment.save()
-			variables = {"bookingRef" : bookingRef}
+			variables = {"bookingRef" : bookingRef, "amount": amount, "pri" : paymentId}
 	#return HttpResponse("OK");
 	return render_to_response('paymentpage.html',{'variables' : variables})
 
@@ -124,7 +128,17 @@ def messengerhook(request):
                         handleMessage(event["sender"]["id"],event["message"]["text"])
                     else:
                         if "recipient" in event and "delivery" not in event:
-                            sendResponse(event["sender"]["id"], "Hello, please pay for your ticket")
+                            print event
+                            if "optin" in event:
+                                print "here"
+                                if "ref" in event["optin"]:
+                                    print "here2"
+                                    pid = event["optin"]["ref"]
+                                    print pid
+                                    for payment in Payment.objects.filter(paymentId=pid):
+                                        print payment
+                                        sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
+                                        sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
                 return HttpResponse("OK")
         except:
             return HttpResponse("OK")
