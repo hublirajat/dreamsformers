@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^$', pay.views.index, name='index'),
     url(r'^createBooking$', 'pay.views.createBooking', name='createBooking'),
     url(r'^fbcallback', pay.views.fbcallback, name='fbcallback'),
+    url(r'^messengerhook',pay.views.messengerhook,name='messengerhook')
 ]

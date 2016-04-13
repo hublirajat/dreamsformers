@@ -215,7 +215,7 @@ appId      : '1686737964947864',
 cookie     : true,  // enable cookies to allow the server to access
                   // the session
 xfbml      : true,  // parse social plugins on this page
-version    : 'v2.5' // use graph api version 2.5
+version    : 'v2.6' // use graph api version 2.5
 });
 
 // Now that we've initialized the JavaScript SDK, we call
@@ -275,6 +275,12 @@ $.ajax({
 
 }
 </script>
+<div class="fb-send-to-messenger"
+  messenger_app_id="1686737964947864"
+  page_id="1712978292318636"
+  data-ref="test"
+  color="blue"
+  size="standard"></div>
 <div class="fb-login-button" scope="public_profile,email,user_location,user_hometown,email,user_about_me" onlogin="checkLoginState();" data-max-rows="1" data-size="medium" data-show-faces="true" data-auto-logout-link="true"></div>
 <div id="status"></div>
 <div id="location"></div>        <!--[if lt IE 8]>
