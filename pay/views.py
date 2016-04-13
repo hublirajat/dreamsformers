@@ -24,6 +24,10 @@ def fb_pay_2(request):
     print 'test'
     return render(request, 'fb_pay_2.html')
 
+def fb_pay_3(request):
+    print 'test'
+    return render(request, 'fb_pay_3.html')
+
 @csrf_exempt
 def fbcallback(request):
     if request.method == 'POST':
