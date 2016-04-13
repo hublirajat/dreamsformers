@@ -121,9 +121,9 @@ def handleMessage(sender, message_text):
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
         sendResponse(sender, "Here is your confirmation:")
-        sendResponseImage(sender,"https://dreamsformers.herokuapp.com/static/pay/img/ConfirmationMessenger.png")
+        sendResponseImage(sender, "https://dreamsformers.herokuapp.com/static/pay/img/ConfirmationMessenger.png")
         sendResponse(sender, "Here is your boarding pass:")
-        sendResponseImage(sender,"https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png")
+        sendResponseImage(sender, "https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png")
 
     else:
         sendResponse(sender, "I don't understand")
@@ -163,4 +163,5 @@ def messengerhook(request):
                                         sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
                 return HttpResponse("OK")
         except:
+            print 'something went wrong'
             return HttpResponse("OK")
