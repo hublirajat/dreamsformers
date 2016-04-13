@@ -37,6 +37,14 @@ def sendResponse(sender, message_text):
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
 
+def handleMessage(sender, message_text):
+    if "pay" in message_text.lower():
+        sendResponse(sender, "You're flight has been paid!")
+        sendResponse(sender, "Here is your boarding pass:")
+        sendResponse(sender, "PNR: 123456")
+    else:
+        sendResponse(sender, "I don't understand")
+
 @csrf_exempt
 def messengerhook(request):
     print request
@@ -54,8 +62,7 @@ def messengerhook(request):
             messaging_events = json_data["entry"][0]["messaging"]
             for event in messaging_events:
                 print event["message"]["text"]
-                sendResponse(event["sender"]["id"],event["message"]["text"])
+                handleMessage(event["sender"]["id"],event["message"]["text"])
             return HttpResponse("OK")
         except:
             return HttpResponse("OK")
-
