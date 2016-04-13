@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render_to_response
 import json
 import requests
 from .models import UserProfile
@@ -56,7 +57,9 @@ def createBooking(request):
 			paymentId = random_with_N_digits(8)
 			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
 			payment.save()
-	return HttpResponse("OK");
+			variables = {"bookingRef" : bookingRef}
+	#return HttpResponse("OK");
+	return render_to_response('paymentpage.html',variables)
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)

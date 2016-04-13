@@ -10,12 +10,12 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="/static/pay/css/normalize.css">
+        <link rel="stylesheet" href="/static/pay/css/main.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-        <script src="js/vendor/handlebars-v4.0.5.js"></script>
+        <script src="/static/pay/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="/static/pay/js/vendor/handlebars-v4.0.5.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         </script>​
 
@@ -30,13 +30,13 @@
         
 <div style="display: block">
 	<span style="color:blue;font-size:20px">Your reservation is :</span><span style="color:red;font-size:20px">Awaiting payment</span>
-	<span style="color:blue;font-size:20px">Reservation Reference</span><span style="color:red;font-size:20px">{some number}</span>
-	<span><img src="img/BOS_NCE_BOOK.PNG" /></span>
-	<span><img src="img/BOOK_CreditCard.PNG" /></span>
-	<span><img src="img/BOOK_paypal.PNG" /></span>
+	<span style="color:blue;font-size:20px">Reservation Reference</span><span style="color:red;font-size:20px">{{ bookingRef.bookingRef }}</span>
+	<span><img src="/static/pay/img/BOS_NCE_BOOK.PNG" /></span>
+	<span><img src="/static/pay/img/BOOK_CreditCard.PNG" /></span>
+	<span><img src="/static/pay/img/BOOK_paypal.PNG" /></span>
 	<div class="fb-div">
-	<span><img src="img/fb_text.PNG" /></span>	
-	<span><img src="img/payWithFB.PNG" onclick="window.open('./fb_pay.html');"/></span>	
+	<span><img src="/static/pay/img/fb_text.PNG" /></span>	
+	<span><img src="/static/pay/img/payWithFB.PNG" onclick="window.open('./fb_pay.html');"/></span>	
 	</div>
 	
 </div>
