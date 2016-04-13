@@ -32,7 +32,7 @@
 
 
 $(function() {
-    $("#datepickerstart").datepicker();
+    $("#id_traveldate").datepicker();
     $("#datepickerend").datepicker();
 });
 </script>
@@ -103,14 +103,14 @@ function getList() {
 {label:'Nice',desc:'France',value:'NCE'}
   ];
 
-    $( "#fromcity" ).autocomplete({
+    $( "#id_origin" ).autocomplete({
       minLength: 1,
       source: projects,
 
       select: function( event, ui ) {
-        $( "#fromcity" ).val( ui.item.value );
-        $( "#fromcity-id" ).val( ui.item.label );
-        $( "#fromcity-description" ).val( ui.item.desc );
+        $( "#id_origin" ).val( ui.item.value );
+        $( "#id_origin-id" ).val( ui.item.label );
+        $( "#id_origin-description" ).val( ui.item.desc );
 
         return false;
       }
@@ -121,14 +121,14 @@ function getList() {
         .appendTo( ul );
     };
 
-		    $( "#tocity" ).autocomplete({
+		    $( "#id_destination" ).autocomplete({
       minLength: 1,
       source: projects,
 
       select: function( event, ui ) {
-        $( "#tocity" ).val( ui.item.value );
-        $( "#tocity-id" ).val( ui.item.label );
-        $( "#tocity-description" ).val( ui.item.desc );
+        $( "#id_destination" ).val( ui.item.value );
+        $( "#id_destination-id" ).val( ui.item.label );
+        $( "#id_destination-description" ).val( ui.item.desc );
 
         return false;
       }
@@ -146,22 +146,22 @@ function getList() {
 function showResults() {
 
 	document.getElementById('view-results').style.display="block";
-	document.getElementById('fromCityOutput').innerHTML = document.getElementById('fromcity').value;
-	document.getElementById('toCityOutput').innerHTML = document.getElementById('tocity').value;
+	document.getElementById('id_originOutput').innerHTML = document.getElementById('id_origin').value;
+	document.getElementById('id_destinationOutput').innerHTML = document.getElementById('id_destination').value;
 	getLayOverCity();
 }
 
 function getImgResults() {
 	document.getElementById('image-results').style.display="block";
-	document.getElementById('image-result').src ="\\static\\pay\\img\\"+document.getElementById('fromcity').value+"_"+document.getElementById('tocity').value+".PNG";
+	document.getElementById('image-result').src ="\\static\\pay\\img\\"+document.getElementById('id_origin').value+"_"+document.getElementById('id_destination').value+".PNG";
 }
 
 function getLayOverCity(){
-	if(document.getElementById('tocity').value == "NCE")
+	if(document.getElementById('id_destination').value == "NCE")
 	{
 		document.getElementById('layOverCity').innerHTML = "CDG";
 	}
-	else if(document.getElementById('tocity').value == "PAR")
+	else if(document.getElementById('id_destination').value == "PAR")
 	{
 		document.getElementById('layOverCity').innerHTML = "AMS";
 	}
@@ -331,8 +331,8 @@ $.ajax({
                         <div class="input-group search-box">
                             <span class="input-group-addon">From</span>
  			    <dd>{{ form.origin }}</dd>
-							<input type="hidden" id="fromcity-id">
-							<p id="fromcity-description"></p>
+							<input type="hidden" id="id_origin-id">
+							<p id="id_origin-description"></p>
                         </div>
                     </div>
 
@@ -340,8 +340,8 @@ $.ajax({
                         <div class="input-group search-box">
                             <span class="input-group-addon">To</span>
 			    <dd>{{ form.destination }}</dd>
-						    <input type="hidden" id="tocity-id">
-							<p id="tocity-description"></p>
+						    <input type="hidden" id="id_destination-id">
+							<p id="id_destination-description"></p>
                         </div>
                     </div>
                 </div>
@@ -449,7 +449,7 @@ ga('send', 'pageview')
 <div id="results-airline" class="result" style="transform: translate3d(0px, 0px, 0px);">
 		<div class="stop-list">
 			<div class="stop-label stop-label-origin">
-				<span id="fromCityOutput">
+				<span id="id_originOutput">
 
 				</span>
 			</div>
@@ -458,7 +458,7 @@ ga('send', 'pageview')
 				<span id="layOverCity"></span>
 			</div>
 			<div class="stop-label stop-label-destination">
-				<span id = "toCityOutput"></span>
+				<span id = "id_destinationOutput"></span>
         	</div>
        </div>
  </div>
@@ -471,7 +471,7 @@ ga('send', 'pageview')
 	<img id="image-result"/>
  <button onclick="createBooking()">GO</button>
 
- </form>	
+ </form>
 </div>
 
 
