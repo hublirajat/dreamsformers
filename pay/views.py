@@ -32,8 +32,10 @@ def sendResponse(sender, message_text):
     data["recipient"] = {}
     data["recipient"]["id"] = sender
 
-    requests.post(token,data)
-    
+    print 'Sending:',data
+
+    response = requests.post(token,json=data)
+    print 'Response :', response, response.content
 
 @csrf_exempt
 def messengerhook(request):
