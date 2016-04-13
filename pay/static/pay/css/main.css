@@ -294,7 +294,7 @@ textarea {
 
 .search-container{
 	display:block;
-	background-color: #1E1E1F;
+	background-color: #16B9DB;
 	width:100%;
 	padding:10px;
 }
@@ -1653,6 +1653,14 @@ body .ui-tooltip {
 	opacity: .3;
 	filter: Alpha(Opacity=30); /* support: IE8 */
 	border-radius: 8px;
+}
+
+.fb-div {
+
+background-color: #08033D;
+	width: 740px;
+	height: 100px;
+
 }
 
 
