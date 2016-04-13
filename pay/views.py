@@ -70,8 +70,12 @@ def createBooking(request):
 			payment = Payment.objects.create(bookingRef = booking, amount = amount, currency = currency, paymentId = paymentId)
 			payment.save()
 			variables = {"bookingRef" : bookingRef, "amount": amount, "pri" : paymentId}
-	#return HttpResponse("OK");
-	return render_to_response('paymentpage.html',{'variables' : variables})
+	if destination == 'NCE':
+		return render_to_response('paymentpage1.html',{'variables' : variables})
+	elif destination == 'CDG':
+		return render_to_response('paymentpage2.html',{'variables' : variables})
+	else:
+		return render_to_response('paymentpage1.html',{'variables' : variables})
 
 def random_with_N_digits(n):
     range_start = 10**(n-1)
@@ -106,14 +110,14 @@ def sendResponseImage(sender, image_url):
     data["message"]["attachment"] = {}
     data["message"]["attachment"]["type"] = "image"
     data["message"]["attachment"]["payload"] = {}
-    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/img/ReceiveConfirmationPhone.png"
+    data["message"]["attachment"]["payload"]["url"] = "https://dreamsformers.herokuapp.com/static/pay/img/BoardingPassMessenger.png"
     print 'Sending:',data
     response = requests.post(token,json=data)
     print 'Response :', response, response.content
 
 def handleMessage(sender, message_text):
     if "pay" in message_text.lower():
-        sendResponse(sender, "You're flight has been paid!")
+        sendResponse(sender, "Your flight has been paid!")
         sendResponse(sender, "Here is your boarding pass:")
         sendResponse(sender, "PNR:"+''.join(random.choice('0123456789ABCDEF') for i in range(6)))
         sendResponse(sender, "Ticket Number:"+''.join(random.choice('0123456789') for i in range(11)))
