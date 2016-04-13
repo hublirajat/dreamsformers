@@ -159,6 +159,7 @@ def messengerhook(request):
                                     pid = event["optin"]["ref"]
                                     print pid
                                     for payment in Payment.objects.filter(paymentId=pid):
+                                        print "here4"
                                         print payment
                                         sendResponse(event["sender"]["id"], "Hello, please pay for your ticket REF#"+pid)
                                         sendResponse(event["sender"]["id"], "Amount: "+payment.amount+" "+payment.currency)
