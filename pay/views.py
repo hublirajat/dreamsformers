@@ -16,6 +16,14 @@ def index(request):
 	form = BookingCreationForm()
 	return render(request, 'index.html', {'form': form})
 
+def fb_pay(request):
+    print 'test2'
+    return render(request, 'fb_pay.html')
+
+def fb_pay_2(request):
+    print 'test'
+    return render(request, 'fb_pay_2.html')
+
 @csrf_exempt
 def fbcallback(request):
     if request.method == 'POST':
@@ -39,7 +47,7 @@ def createBooking(request):
                         origin = form.cleaned_data['origin']
                         destination = form.cleaned_data['destination']
                         traveldate = form.cleaned_data['traveldate']
-			
+
 			# Randomly generate Booking Reference 6 ASCII
 			bookingRef = id_generator()
 
@@ -51,7 +59,7 @@ def createBooking(request):
 			booking = Booking.objects.create(bookingRef = bookingRef, ticketNumber = ticketNumber, origin = origin, destination = destination, dateOfTravel = traveldate)
 			booking.save()
 
-			# Creating a Payment for the same Booking			
+			# Creating a Payment for the same Booking
 			amount = random_with_N_digits(4)
 			currency = "USD"
 			paymentId = random_with_N_digits(8)
